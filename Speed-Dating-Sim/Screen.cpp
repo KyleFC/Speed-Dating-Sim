@@ -151,7 +151,7 @@ string* Screen::getCharacter(char letter)
 /// lineLength*8
 /// </summary>
 /// <param name="lineLength">Number of Alphanumeric characters per line.</param>
-void Screen::printMarquee(int lineLength)
+void Screen::printMarquee()
 {
 	cout << " =";
 	for (int i = 0; i < lineLength; i++)
@@ -160,13 +160,13 @@ void Screen::printMarquee(int lineLength)
 	}
 	cout << endl;
 }
-	
+
 /// <summary>
 /// Takes a string of text, converts it to its
 /// ASCII art equivalent, and prints to console.
 /// </summary>
 /// <param name="text">Some words, usually dialog</param>
-void Screen::printDialog(string text)
+void Screen::printText(string text)
 {
 	/*
 		VARIABLES:
@@ -177,16 +177,16 @@ void Screen::printDialog(string text)
 		int        textLength  : How long the text is that needs conversion
 		int        lines       : How many lines of text will need to be printed
 		int        padding     : How many spaces need to be appended to the text
-									so that each line reaches the lineLength amount
+								 so that each line reaches the lineLength amount
 
 		string[][] asciiMatrix : Used for storing ASCII text in the order that it
-									will be printed
+								 will be printed
 		string*    asciiLetter : Used to determine which character corresponse to
-									which ASCII text character
+								 which ASCII text character
 		string     parcedText  : Contains individual line of text with char length
-									determined lineLength
+								 determined lineLength
 	*/
-	const int lineLength = 15; //fuck this const, it only works if I put it in the function.
+	//const int lineLength = 15; //fuck this const, it only works if I put it in the function.
 	//const int lineLength = length;
 	int textLength = text.size();
 	int lines = ((textLength) / lineLength) + 1;
@@ -194,7 +194,7 @@ void Screen::printDialog(string text)
 
 
 	//string  asciiMatrix[lineLength][6] = { {} };
-	vector<vector<string>> asciiMatrix(6); //2D vector with 6 rows
+	vector<vector<string>> asciiMatrix(lineLength); //2D vector with 6 rows
 	string* asciiLetter = NULL;
 	string  parcedText = "";
 
@@ -209,12 +209,9 @@ void Screen::printDialog(string text)
 		}
 	}
 
-	printMarquee(lineLength); //Prints top border
-
 	for (int a = 0; a < lines + 1; a++)
 	{
-		cout << 'here';
-		asciiMatrix[a] = vector<string>(lineLength); //specifies how many cols(characters) per line
+
 		parcedText = text.substr((a * lineLength), lineLength);
 
 		for (int i = 0; i < lineLength; i++)//Converts individual chars from string into Ascii Art
@@ -223,12 +220,11 @@ void Screen::printDialog(string text)
 			char letter = toupper(parcedText.at(i));
 
 			asciiLetter = getCharacter(letter);
-
+			asciiMatrix[i] = vector<string>(6); //specifies how many cols(characters) per line
 
 			for (int j = 0; j < 6; j++) //Copies strings to Matrix 
 			{
 				asciiMatrix[i][j] = *(asciiLetter + j);
-				cout << *(asciiLetter + j);
 			}
 		}
 		for (int x = 0; x < 6; x++) //Prints line of text
@@ -242,22 +238,42 @@ void Screen::printDialog(string text)
 			cout << endl;
 		}
 	}
-	printMarquee(lineLength); //Prints Bottom Border
 }
 
 
+/// <summary>
+/// Internal function used to print a marquee of length 
+/// lineLength*8
+/// </summary>
+/// <param name="lineLength">Number of Alphanumeric characters per line.</param>
+void Screen::printMarquee(int lineLength)
+{
+	cout << " =";
+	for (int i = 0; i < lineLength; i++)
+	{
+		cout << "========";
+	}
+	cout << endl;
+}
+	
+void Screen::printDialog(string text)
+{
+	printMarquee();
+	printText(text);
+	printMarquee();
+}
 
+/// <summary>
+/// Prints potential actions the player can take
+/// </summary>
+/// <param name="options">List of 4 options the player can select.</param>
 void Screen::printOptions(string options[4])
 {
-	const int lineLength = 15;
-	string  asciiMatrix[lineLength][6] = { {} };
-	string* asciiLetter = NULL;
-	string  parcedText = "";
 	for (int a = 0; a < 4; a++)
 	{
-
+		printText(options[a]);
 	}
-	//char letter = toupper(parcedText.at());
+	printMarquee();
 }
 
 };

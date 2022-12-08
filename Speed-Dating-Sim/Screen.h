@@ -6,6 +6,7 @@ namespace scrn
 class Screen
 {
 private:
+	const int lineLength = 15;
 	string A[6]
 		= { "  ___   ", " / _ \\  ", "/ /_\\ \\ ", "|  _  | ", "| | | | ", "\\_| |_/ " };
 	string B[6]
@@ -100,7 +101,10 @@ private:
 		= { " _      ", "( )     ", "|/      ", "        ", "        ", "        " };
 
 
+
 	string* getCharacter(char letter);
+	void printText(string text);
+	void printMarquee();
 
 	/// <summary>
 	/// Internal function used to print a marquee of length 
