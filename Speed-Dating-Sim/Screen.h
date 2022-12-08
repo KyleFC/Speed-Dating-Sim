@@ -338,7 +338,10 @@ private:
 
 public:
 
-
+	/// <summary>
+	/// Prints Character Dialog
+	/// </summary>
+	/// <param name="text">The dialog of a character</param>
 	void printDialog(string text)
 	{
 		printMarquee();
