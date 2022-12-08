@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>;
 #include "Screen.h";
+#include <iostream>
 using namespace std;
 using namespace scrn;
 
