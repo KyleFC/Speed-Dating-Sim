@@ -308,7 +308,7 @@ public:
 
 		for (int a = 0; a < lines+1; a++)
 		{
-			asciiMatrix[a] = vector<string>(lineLength); //specifies how many cols(characters) per line
+			
 			parcedText = text.substr((a*lineLength), lineLength);
 			
 			for (int i = 0; i < lineLength; i++)//Converts individual chars from string into Ascii Art
@@ -317,12 +317,12 @@ public:
 				char letter = toupper(parcedText.at(i));
 
 				asciiLetter = getCharacter(letter);
-
+				asciiMatrix[i] = vector<string>(lineLength); //specifies how many cols(characters) per line
 
 				for (int j = 0; j < 6; j++) //Copies strings to Matrix 
 				{
 					asciiMatrix[i][j] = *(asciiLetter + j);
-					cout << *(asciiLetter + j);
+					cout << *(asciiLetter + j) << endl;
 				}
 			}
 			for (int x = 0; x < 6; x++) //Prints line of text
