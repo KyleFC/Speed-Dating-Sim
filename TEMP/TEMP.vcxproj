@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{bb44cc01-1fb8-4f0a-a1fb-9cae7558ff0b}</ProjectGuid>
-    <RootNamespace>SpeedDatingSim</RootNamespace>
+    <ProjectGuid>{d935bfec-69da-4002-9b65-da3eff21bf95}</ProjectGuid>
+    <RootNamespace>TEMP</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -127,10 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Speed-Dating-Sim.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Screen.h" />
+    <ClCompile Include="TEMP.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
