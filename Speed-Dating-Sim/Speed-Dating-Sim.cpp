@@ -1,6 +1,7 @@
 #include <iostream>
-#include "Screen.h"
+#include "Screen.cpp"
 using namespace std;
+using namespace scrn;
 
 int main()
 {
