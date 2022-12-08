@@ -5,6 +5,7 @@ using namespace std;
 class Screen
 {
 private:
+	const int lineLength = 15;
 	//Alphabet in Ascii art form
 	string A[6]
 		= { "  ___   ", " / _ \\  ", "/ /_\\ \\ ", "|  _  | ", "| | | | ", "\\_| |_/ " };
@@ -246,7 +247,7 @@ private:
 	/// lineLength*8
 	/// </summary>
 	/// <param name="lineLength">Number of Alphanumeric characters per line.</param>
-	void printMarquee(int lineLength)
+	void printMarquee()
 	{
 		cout << " =";
 		for (int i = 0; i < lineLength; i++)
@@ -255,13 +256,13 @@ private:
 		}
 		cout << endl;
 	}
-public:
+
 	/// <summary>
-	/// Takes a string of text, converts it to its
-	/// ASCII art equivalent, and prints to console.
-	/// </summary>
-	/// <param name="text">Some words, usually dialog</param>
-	void printDialog(string text)
+/// Takes a string of text, converts it to its
+/// ASCII art equivalent, and prints to console.
+/// </summary>
+/// <param name="text">Some words, usually dialog</param>
+	void printText(string text)
 	{
 		/*
 			VARIABLES:
@@ -272,28 +273,28 @@ public:
 			int        textLength  : How long the text is that needs conversion
 			int        lines       : How many lines of text will need to be printed
 			int        padding     : How many spaces need to be appended to the text
-						 		     so that each line reaches the lineLength amount
+									 so that each line reaches the lineLength amount
 
 			string[][] asciiMatrix : Used for storing ASCII text in the order that it
 									 will be printed
-			string*    asciiLetter : Used to determine which character corresponse to 
+			string*    asciiLetter : Used to determine which character corresponse to
 									 which ASCII text character
-			string     parcedText  : Contains individual line of text with char length 
+			string     parcedText  : Contains individual line of text with char length
 									 determined lineLength
 		*/
-		const int lineLength = 15; //fuck this const, it only works if I put it in the function.
+		//const int lineLength = 15; //fuck this const, it only works if I put it in the function.
 		//const int lineLength = length;
-		int textLength       = text.size(); 
-		int lines            = ((textLength) / lineLength) + 1;
-		int padding          = lineLength - ((textLength) % lineLength);
+		int textLength = text.size();
+		int lines = ((textLength) / lineLength) + 1;
+		int padding = lineLength - ((textLength) % lineLength);
 
 
 		//string  asciiMatrix[lineLength][6] = { {} };
-		vector<vector<string>> asciiMatrix(6); //2D vector with 6 rows
-		string* asciiLetter                = NULL;
-		string  parcedText                 = "";
+		vector<vector<string>> asciiMatrix(lineLength); //2D vector with 6 rows
+		string* asciiLetter = NULL;
+		string  parcedText = "";
 
-		
+
 		if (padding != 0) //Checks if we need to add any padding to the end of the text
 		{
 			lines -= 1;
@@ -304,25 +305,22 @@ public:
 			}
 		}
 
-		printMarquee(lineLength); //Prints top border
-
-		for (int a = 0; a < lines+1; a++)
+		for (int a = 0; a < lines + 1; a++)
 		{
-			
-			parcedText = text.substr((a*lineLength), lineLength);
-			
+
+			parcedText = text.substr((a * lineLength), lineLength);
+
 			for (int i = 0; i < lineLength; i++)//Converts individual chars from string into Ascii Art
 			{
 				//Grabs letter
 				char letter = toupper(parcedText.at(i));
 
 				asciiLetter = getCharacter(letter);
-				asciiMatrix[i] = vector<string>(lineLength); //specifies how many cols(characters) per line
+				asciiMatrix[i] = vector<string>(6); //specifies how many cols(characters) per line
 
 				for (int j = 0; j < 6; j++) //Copies strings to Matrix 
 				{
 					asciiMatrix[i][j] = *(asciiLetter + j);
-					cout << *(asciiLetter + j) << endl;
 				}
 			}
 			for (int x = 0; x < 6; x++) //Prints line of text
@@ -336,22 +334,29 @@ public:
 				cout << endl;
 			}
 		}
-		printMarquee(lineLength); //Prints Bottom Border
 	}
 
+public:
 
 
+	void printDialog(string text)
+	{
+		printMarquee();
+		printText(text);
+		printMarquee();
+	}
+
+	/// <summary>
+	/// Prints potential actions the player can take
+	/// </summary>
+	/// <param name="options">List of 4 options the player can select.</param>
 	void printOptions(string options[4])
 	{
-		const int lineLength = 15;
-		string  asciiMatrix[lineLength][6] = { {} };
-		string* asciiLetter = NULL;
-		string  parcedText = "";
-		for (int a = 0; a < 4; a++)
+		for(int a = 0; a < 4; a++)
 		{
-			
+			printText(options[a]);
 		}
-		//char letter = toupper(parcedText.at());
+		printMarquee();
 	}
 
 };
