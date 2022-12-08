@@ -213,6 +213,7 @@ void Screen::printDialog(string text)
 
 	for (int a = 0; a < lines + 1; a++)
 	{
+		cout << 'here';
 		asciiMatrix[a] = vector<string>(lineLength); //specifies how many cols(characters) per line
 		parcedText = text.substr((a * lineLength), lineLength);
 
